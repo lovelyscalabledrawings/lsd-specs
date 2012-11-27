@@ -112,9 +112,9 @@ describe('LSD.Element', function() {
             element.setAttribute('tabindex', '${x + 1}')
             widget.set('origin', element);
             expect(widget.attributes.tabindex).toBeUndefined();
-            widget.variables.set('x', 5);
+            widget.set('variables.x', 5);
             expect(widget.attributes.tabindex).toBe(6);
-            widget.variables.set('x', -1)
+            widget.set('variables.x', -1)
             expect(widget.attributes.tabindex).toBe(0);
             widget.unset('origin', element)
             expect(widget.attributes.tabindex).toBeUndefined();
@@ -127,9 +127,9 @@ describe('LSD.Element', function() {
             element.setAttribute('title', '${x + 1} & ${x - 1}')
             widget.set('origin', element);
             expect(widget.attributes.title).toBeUndefined();
-            widget.variables.set('x', 5);
+            widget.set('variables.x', 5);
             expect(widget.attributes.title).toBe('6 & 4');
-            widget.variables.set('x', -1)
+            widget.set('variables.x', -1)
             expect(widget.attributes.title).toBe('0 & -2');
             widget.unset('origin', element)
             expect(widget.attributes.title).toBeUndefined();
@@ -142,9 +142,9 @@ describe('LSD.Element', function() {
             element.setAttribute('title', 'xxx${x + 1}xx')
             widget.set('origin', element);
             expect(widget.attributes.title).toBeUndefined();
-            widget.variables.set('x', 5);
+            widget.set('variables.x', 5);
             expect(widget.attributes.title).toBe('xxx6xx');
-            widget.variables.set('x', -1)
+            widget.set('variables.x', -1)
             expect(widget.attributes.title).toBe('xxx0xx');
             widget.unset('origin', element)
             expect(widget.attributes.title).toBeUndefined();
@@ -159,9 +159,9 @@ describe('LSD.Element', function() {
               var element = wrapper.firstChild;
               widget.set('origin', element);
               expect(widget.attributes.title).toBeUndefined();
-              widget.variables.set('object', {title: 'Jeeez nigga'})
+              widget.set('variables.object', {title: 'Jeeez nigga'})
               expect(widget.attributes.title).toBe('Jeeez nigga');
-              widget.variables.set('object', {title: 'Jeeezos chr0ss'})
+              widget.set('variables.object', {title: 'Jeeezos chr0ss'})
               expect(widget.attributes.title).toBe('Jeeezos chr0ss');
               widget.unset('origin', element);
               expect(widget.attributes.title).toBeUndefined();
@@ -175,17 +175,17 @@ describe('LSD.Element', function() {
               var element = wrapper.firstChild;
               widget.set('origin', element);
               expect(widget.attributes.title).toBeUndefined();
-              widget.variables.set('object', {title: 'Jeeez nigga'})
+              widget.set('variables.object', {title: 'Jeeez nigga'})
               expect(widget.attributes.title).toBeUndefined();
-              widget.variables.set('condition', true)
+              widget.set('variables.condition', true)
               expect(widget.attributes.title).toBe('Jeeez nigga');
-              widget.variables.set('condition', false)
+              widget.set('variables.condition', false)
               expect(widget.attributes.title).toBeUndefined();
-              widget.variables.set('object', {title: 'Jeeezos chr0ss'})
+              widget.set('variables.object', {title: 'Jeeezos chr0ss'})
               expect(widget.attributes.title).toBeUndefined();
-              widget.variables.set('condition', true)
+              widget.set('variables.condition', true)
               expect(widget.attributes.title).toBe('Jeeezos chr0ss');
-              widget.variables.set('object', {title: 'Jeeezos chr0ssZ'})
+              widget.set('variables.object', {title: 'Jeeezos chr0ssZ'})
               expect(widget.attributes.title).toBe('Jeeezos chr0ssZ');
               widget.unset('origin', element);
               expect(widget.attributes.title).toBeUndefined();
@@ -752,5 +752,20 @@ describe('LSD.Element', function() {
       expect(widget.tit0l).toBeUndefined()
       expect(widget.title).toBeUndefined()
     });
+  })
+  describe('.variables', function() {
+    it('should reuse variables objects from parents and copy on write', function() {
+      var parent = new LSD.Element;
+      var child = new LSD.Element;
+      parent.appendChild(child);
+      expect(parent.variables).toBe(child.variables)
+      child.set('variables.test', true);
+      expect(parent.variables).toNotBe(child.variables)
+      expect(parent.variables.test).toBeUndefined();
+      expect(child.variables.test).toBe(true);
+      parent.removeChild(child);
+      expect(child._journal).toBeUndefined();
+      expect(child.variables.test).toBe(true);
+    })
   })
 })

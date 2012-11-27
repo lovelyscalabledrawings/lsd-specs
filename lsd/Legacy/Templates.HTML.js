@@ -272,7 +272,7 @@ describe("LSD.Layout", function() {
               section.addLayout(null, nodes)
               expect(section.element.childNodes.length).toEqual(4)
               expect(section.childNodes.map(function(e) { return e.tagName })).toEqual([]);
-              section.variables.unset('condition', 'YES');
+              section.unset('variables.condition', 'YES');
               expect(section.childNodes.map(function(e) { return e.tagName })).toEqual(['li']);
             })
           });
@@ -752,7 +752,7 @@ describe("LSD.Layout", function() {
           widget.variables.set('character', 'bard')
           expect(element.getElement('> header h1').get('text')).toEqual('Sweetvoice')
           expect(element.getElement('summary').get('text').clean()).toEqual('Singer in Indie records of Unknown location')
-          widget.variables.unset('alignment', 'good')
+          widget.unset('variables.alignment', 'good')
           expect(element.getElement('summary').get('text').clean()).toEqual('Singer in Music records of Holywood')
           widget.variables.set('character', 'mage')
           expect(element.getElement('> header h1').get('text')).toEqual('Sir Overrule')

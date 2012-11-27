@@ -850,7 +850,6 @@ describe('LSD.Storage', function() {
             setLocal(0, 'dance');
             setLocal(1, 'god');
             setLocal('length', 2)
-            debugger
             LSD.Storage.Local(array);
             expect(array[0]).toBe('songs');
             expect(array[1]).toBe('god');

@@ -28,7 +28,6 @@ describe('LSD.Relation', function() {
       var parent = new LSD.Element({related: relation});
       var a = new LSD.Element('a');
       var b = new LSD.Element('b');
-      debugger
       parent.appendChild(a);
       expect(relation.slice()).toEqual([a])
       parent.appendChild(b);

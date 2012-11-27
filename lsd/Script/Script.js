@@ -40,14 +40,14 @@ describe("LSD.Script", function() {
             expect(script.value).toEqual('joosh')
             scope.variables.set('jeez', 'jack')
             expect(script.value).toEqual('jack')
-            scope.variables.unset('jeez', 'jack')
+            scope.unset('variables.jeez', 'jack')
             expect(count).toEqual(2);
             expect(script.value).toEqual('oink');
             scope.variables.set('jeez', 'jim')
             expect(script.value).toEqual('jim')
             script.unset('attached', true)
             expect(script.value).toBeUndefined();
-            scope.variables.unset('jeez', 'jim')
+            scope.unset('variables.jeez', 'jim')
             expect(script.value).toBeUndefined();
             expect(count).toEqual(2);
             script.set('attached', true)

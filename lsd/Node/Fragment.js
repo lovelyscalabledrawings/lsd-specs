@@ -73,11 +73,11 @@ describe("LSD.Fragment", function() {
             expect(fragment.childNodes[0].nodeType).toEqual(1);
             expect(fragment.childNodes[0].nodeName).toEqual('b');
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, ${metal}, lawd');
-            fragment.childNodes[0].variables.set('metal', 'Gold')
+            fragment.childNodes[0].set('variables.metal', 'Gold')
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, Gold, lawd');
             fragment.childNodes[0].variables.change('metal', 'Silver')
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, Silver, lawd');
-            fragment.childNodes[0].variables.unset('metal', 'Silver')
+            fragment.childNodes[0].unset('variables.metal', 'Silver')
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, ${metal}, lawd');
           })
           xit ("should parse interpolations", function() {
@@ -85,7 +85,7 @@ describe("LSD.Fragment", function() {
             expect(fragment.childNodes[0].nodeType).toEqual(1);
             expect(fragment.childNodes[0].nodeName).toEqual('b');
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, ${metal}, lawd');
-            fragment.childNodes[0].variables.set('metal', 'Gold')
+            fragment.childNodes[0].set('variables.metal', 'Gold')
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, Gold, lawd');
             fragment.childNodes[0].variables.change('metal', 'Silver')
             expect(fragment.childNodes[0].childNodes[0].textContent).toEqual('Oh, Silver, lawd');
@@ -116,24 +116,24 @@ describe("LSD.Fragment", function() {
             console.log(fragment[2][1].next.parentNode, fragment[2][2].parentNode)
             expect(getText()).toEqual('That only takes 5 minutes to do! Come on, copy and paste what we have already');
             zzz = true;
-            parent.variables.set('urgency', true);
+            parent.set('variables.urgency', true);
             console.log(fragment[2][1].next.parentNode, fragment[2][2].parentNode)
             expect(getText()).toEqual('I want it right now');
-            //parent.variables.unset('urgency')
+            //parent.unset('variables.urgency')
             //expect(getText()).toEqual('That only takes 5 minutes to do! Come on, copy and paste what we have already');
-            //parent.variables.set('urgency', true);
+            //parent.set('variables.urgency', true);
             //expect(getText()).toEqual('I want it right now');
-            //parent.variables.unset('urgency')
+            //parent.unset('variables.urgency')
             //expect(getText()).toEqual('That only takes 5 minutes to do! Come on, copy and paste what we have already');
-            //parent.variables.set('a', 2);
+            //parent.set('variables.a', 2);
             //expect(getText()).toEqual('This is not urgent, but hell, we need this today');
-            //parent.variables.set('urgency', true);
+            //parent.set('variables.urgency', true);
             //expect(getText()).toEqual('This is so urgent..');
-            //parent.variables.set('a', 1);
+            //parent.set('variables.a', 1);
             //expect(getText()).toEqual('I want it right now');
-            //parent.variables.set('a', 2);
+            //parent.set('variables.a', 2);
             //expect(getText()).toEqual('This is so urgent..');
-            //parent.variables.unset('urgency')
+            //parent.unset('variables.urgency')
             //expect(getText()).toEqual('This is not urgent, but hell, we need this today');
           })
           describe("and multiple conditions linked together are used", function() {
@@ -204,59 +204,59 @@ describe("LSD.Fragment", function() {
                 return parent.textContent.replace(/^\s+|\s+$/g, '')
               }
               expect(getText()).toEqual('');
-              parent.variables.set('condition', true);
+              parent.set('variables.condition', true);
               expect(getText()).toEqual('Very Bad Evening Dad');
-              parent.variables.set('time', 11);
+              parent.set('variables.time', 11);
               expect(getText()).toEqual('Very Bad Morning Dad');
-              parent.variables.set('good', true);
+              parent.set('variables.good', true);
               expect(getText()).toEqual('Very Good Morning Dad');
-              parent.variables.set('good', false);
+              parent.set('variables.good', false);
               expect(getText()).toEqual('Very Bad Morning Dad');
-              parent.variables.set('time', 13);
+              parent.set('variables.time', 13);
               expect(getText()).toEqual('Very Bad Day Dad');
-              parent.variables.set('mom', true);
+              parent.set('variables.mom', true);
               expect(getText()).toEqual('Very Bad Day Mom');
-              parent.variables.set('good', true);
+              parent.set('variables.good', true);
               expect(getText()).toEqual('Very Good Day Mom');
-              parent.variables.set('good', false);
+              parent.set('variables.good', false);
               expect(getText()).toEqual('Very Bad Day Mom');
-              parent.variables.set('respect', false);
+              parent.set('variables.respect', false);
               expect(getText()).toEqual('Very Bad Day Mom');
-              parent.variables.set('respect', true);
+              parent.set('variables.respect', true);
               expect(getText()).toEqual('Very Bad Day Mother');
-              parent.variables.set('good', true);
+              parent.set('variables.good', true);
               expect(getText()).toEqual('Very Good Day Mother');
-              parent.variables.set('good', false);
+              parent.set('variables.good', false);
               expect(getText()).toEqual('Very Bad Day Mother');
-              parent.variables.set('mom', false);
+              parent.set('variables.mom', false);
               expect(getText()).toEqual('Very Bad Day Father');
-              parent.variables.set('condition', false);
+              parent.set('variables.condition', false);
               expect(getText()).toEqual('');
-              parent.variables.set('condition', true);
+              parent.set('variables.condition', true);
               expect(getText()).toEqual('Very Bad Day Father');
-              parent.variables.set('respect', false);
+              parent.set('variables.respect', false);
               expect(getText()).toEqual('Very Bad Day Dad');
-              parent.variables.set('mom', true);
+              parent.set('variables.mom', true);
               expect(getText()).toEqual('Very Bad Day Mom');
-              parent.variables.set('good', true);
+              parent.set('variables.good', true);
               expect(getText()).toEqual('Very Good Day Mom');
-              parent.variables.set('time', 4);
+              parent.set('variables.time', 4);
               expect(getText()).toEqual('Very Good Night Mom');
-              parent.variables.set('chill', true);
+              parent.set('variables.chill', true);
               expect(getText()).toEqual('Good Night Mom');
-              parent.variables.set('time', 23);
+              parent.set('variables.time', 23);
               expect(getText()).toEqual('Good Evening Mom');
-              parent.variables.set('good', false);
+              parent.set('variables.good', false);
               expect(getText()).toEqual('Bad Evening Mom');
-              parent.variables.set('respect', true);
+              parent.set('variables.respect', true);
               expect(getText()).toEqual('Bad Evening Mother');
-              parent.variables.set('mom', false);
+              parent.set('variables.mom', false);
               expect(getText()).toEqual('Bad Evening Father');
-              parent.variables.set('chill', false);
+              parent.set('variables.chill', false);
               expect(getText()).toEqual('Very Bad Evening Father');
-              parent.variables.set('respect', false);
+              parent.set('variables.respect', false);
               expect(getText()).toEqual('Very Bad Evening Dad');
-              parent.variables.set('time', 13);
+              parent.set('variables.time', 13);
               expect(getText()).toEqual('Very Bad Day Dad');
             })
           })
@@ -267,7 +267,10 @@ describe("LSD.Fragment", function() {
             var parent = new LSD.Element;
             parent.appendChild(fragment);
             expect(parent.textContent).toBe('2')
-            parent.variables.set('a', 2)
+            expect(fragment.variables).toBe(parent.variables);
+            expect(fragment.childNodes[0].variables).toBe(parent.variables);
+            expect(fragment.childNodes[1].variables).toBe(parent.variables);
+            parent.set('variables.a', 2)
             expect(parent.textContent).toBe('1')
             expect(fragment.variables).toBe(parent.variables);
             expect(fragment.parentNode).toBe(parent);
@@ -278,17 +281,17 @@ describe("LSD.Fragment", function() {
             expect(parent.childNodes[2].nodeType).toEqual(3);
             expect(parent.childNodes[3].nodeType).toEqual(7);
             expect(parent.childNodes[4].nodeType).toEqual(7);
-            parent.variables.set('a', 0)
+            parent.set('variables.a', 0)
             expect(parent.textContent).toBe('2')
             expect(parent.childNodes[2].nodeType).toEqual(7);
             expect(parent.childNodes[3].nodeType).toEqual(3);
             expect(parent.childNodes[4].nodeType).toEqual(7);
-            parent.variables.set('a', 2)
+            parent.set('variables.a', 2)
             expect(parent.textContent).toBe('1')
             expect(parent.childNodes[2].nodeType).toEqual(3);
             expect(parent.childNodes[3].nodeType).toEqual(7);
             expect(parent.childNodes[4].nodeType).toEqual(7);
-            parent.variables.set('a', 0)
+            parent.set('variables.a', 0)
             expect(parent.textContent).toBe('2')
             expect(parent.childNodes[2].nodeType).toEqual(7);
             expect(parent.childNodes[3].nodeType).toEqual(3);
@@ -299,33 +302,33 @@ describe("LSD.Fragment", function() {
             var parent = new LSD.Element;
             parent.appendChild(fragment);
             expect(parent.textContent).toBe('4')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('2')
-            parent.variables.set('c', true)
+            parent.set('variables.c', true)
             expect(parent.textContent).toBe('2')
-            parent.variables.unset('b', true)
+            parent.unset('variables.b', true)
             expect(parent.textContent).toBe('3')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('1')
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('3')
-            parent.variables.unset('c', true)
+            parent.unset('variables.c', true)
             expect(parent.textContent).toBe('4')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('1')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('1')
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('2')
-            parent.variables.unset('b', true);
+            parent.unset('variables.b', true);
             expect(parent.textContent).toBe('4')
-            parent.variables.set('c', true);
+            parent.set('variables.c', true);
             expect(parent.textContent).toBe('3')
-            parent.variables.set('b', true);
+            parent.set('variables.b', true);
             expect(parent.textContent).toBe('2')
-            parent.variables.unset('c', true);
+            parent.unset('variables.c', true);
             expect(parent.textContent).toBe('2')
-            parent.variables.unset('b', true);
+            parent.unset('variables.b', true);
             expect(parent.textContent).toBe('4')
           });
           it ("should recognize nested conditional branches in HTML and render widgets accordingly 1", function() {
@@ -345,35 +348,34 @@ describe("LSD.Fragment", function() {
             var parent = new LSD.Element;
             parent.appendChild(fragment);
             expect(parent.textContent).toBe('4')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('2')
-            parent.variables.set('c', true)
+            parent.set('variables.c', true)
             expect(parent.textContent).toBe('2')
-            parent.variables.unset('b', true)
+            parent.unset('variables.b', true)
             expect(parent.textContent).toBe('3')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('1')
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('3')
-            parent.variables.unset('c', true)
+            parent.unset('variables.c', true)
             expect(parent.textContent).toBe('4')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('1')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('1')
-            window.zz = true;
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('2')
-            //parent.variables.unset('b', true);
-            //expect(parent.textContent).toBe('4')
-            //parent.variables.set('c', true);
-            //expect(parent.textContent).toBe('3')
-            //parent.variables.set('b', true);
-            //expect(parent.textContent).toBe('2')
-            //parent.variables.unset('c', true);
-            //expect(parent.textContent).toBe('2')
-            //parent.variables.unset('b', true);
-            //expect(parent.textContent).toBe('4')
+            parent.unset('variables.b', true);
+            expect(parent.textContent).toBe('4')
+            parent.set('variables.c', true);
+            expect(parent.textContent).toBe('3')
+            parent.set('variables.b', true);
+            expect(parent.textContent).toBe('2')
+            parent.unset('variables.c', true);
+            expect(parent.textContent).toBe('2')
+            parent.unset('variables.b', true);
+            expect(parent.textContent).toBe('4')
           });
           it ("should recognize nested conditional branches in HTML and render widgets accordingly", function() {
             var fragment = new LSD.Fragment('<!--if a-->1<!--else--><!--if b -->2<!--elsif c -->3<!--else-->4<!--end--><!--end--><!--if a-->1<!--else--><!--if b -->2<!--elsif c -->3<!--else-->4<!--end--><!--end-->');
@@ -385,33 +387,33 @@ describe("LSD.Fragment", function() {
             expect(parent.childNodes[3].nodeType).toBe(7)
             expect(parent.childNodes[4].nodeType).toBe(7)
             expect(parent.textContent).toBe('44')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('22')
-            parent.variables.set('c', true)
+            parent.set('variables.c', true)
             expect(parent.textContent).toBe('22')
-            parent.variables.unset('b', true)
+            parent.unset('variables.b', true)
             expect(parent.textContent).toBe('33')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('11')
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('33')
-            parent.variables.unset('c', true)
+            parent.unset('variables.c', true)
             expect(parent.textContent).toBe('44')
-            parent.variables.set('a', true)
+            parent.set('variables.a', true)
             expect(parent.textContent).toBe('11')
-            parent.variables.set('b', true)
+            parent.set('variables.b', true)
             expect(parent.textContent).toBe('11')
-            parent.variables.unset('a', true);
+            parent.unset('variables.a', true);
             expect(parent.textContent).toBe('22')
-            parent.variables.unset('b', true);
+            parent.unset('variables.b', true);
             expect(parent.textContent).toBe('44')
-            parent.variables.set('c', true);
+            parent.set('variables.c', true);
             expect(parent.textContent).toBe('33')
-            parent.variables.set('b', true);
+            parent.set('variables.b', true);
             expect(parent.textContent).toBe('22')
-            parent.variables.unset('c', true);
+            parent.unset('variables.c', true);
             expect(parent.textContent).toBe('22')
-            parent.variables.unset('b', true);
+            parent.unset('variables.b', true);
             expect(parent.textContent).toBe('44')
           });
           it ('should handle deeply nested conditionals', function() {
@@ -448,29 +450,29 @@ describe("LSD.Fragment", function() {
               return parent.textContent.replace(/[\s\n]+|\s*$|^\s*/gm, '');
             }
             expect(getText()).toBe('');
-            parent.variables.set('condition', true);
+            parent.set('variables.condition', true);
             expect(getText()).toBe('');
-            parent.variables.set('a', 'A');
+            parent.set('variables.a', 'A');
             expect(getText()).toBe('A');
-            parent.variables.set('b', 'B');
+            parent.set('variables.b', 'B');
             expect(getText()).toBe('AB');
-            parent.variables.set('c', 'C');
+            parent.set('variables.c', 'C');
             expect(getText()).toBe('ABC');
-            parent.variables.set('d', 'D');
+            parent.set('variables.d', 'D');
             expect(getText()).toBe('ABCD');
-            parent.variables.unset('c', 'C');
+            parent.unset('variables.c', 'C');
             expect(getText()).toBe('AB');
-            parent.variables.unset('a', 'A');
+            parent.unset('variables.a', 'A');
             expect(getText()).toBe('');
-            parent.variables.set('c', 'C');
+            parent.set('variables.c', 'C');
             expect(getText()).toBe('');
-            parent.variables.set('a', 'A');
+            parent.set('variables.a', 'A');
             expect(getText()).toBe('ABCD');
-            parent.variables.unset('a', 'A');
+            parent.unset('variables.a', 'A');
             expect(getText()).toBe('');
-            parent.variables.unset('d', 'D');
+            parent.unset('variables.d', 'D');
             expect(getText()).toBe('');
-            parent.variables.set('a', 'A');
+            parent.set('variables.a', 'A');
             expect(getText()).toBe('ABC');
           })
           xit ("should handle nested conditions with else blocks", function() {
@@ -515,27 +517,27 @@ describe("LSD.Fragment", function() {
               return parent.textContent.replace(/[\s\n]+|\s*$|^\s*/gm, '');
             }
             expect(getText()).toBe('');
-            parent.variables.set('condition', true);
+            parent.set('variables.condition', true);
             expect(getText()).toEqual('X')
-            parent.variables.set('b', 2);
+            parent.set('variables.b', 2);
             expect(getText()).toEqual('X')
-            parent.variables.set('a', 1);
+            parent.set('variables.a', 1);
             expect(getText()).toEqual('12X')
-            parent.variables.set('c', 3);
+            parent.set('variables.c', 3);
             expect(getText()).toEqual('123X')
-            parent.variables.set('b', 0);
+            parent.set('variables.b', 0);
             expect(getText()).toEqual('1X')
-            parent.variables.set('d', 4);
-            parent.variables.set('b', -2);
+            parent.set('variables.d', 4);
+            parent.set('variables.b', -2);
             expect(getText()).toEqual('1-234')
-            parent.variables.set('condition', false)
+            parent.set('variables.condition', false)
             expect(getText()).toEqual('')
-            parent.variables.set('b', 22);
-            parent.variables.set('condition', true)
+            parent.set('variables.b', 22);
+            parent.set('variables.condition', true)
             expect(getText()).toEqual('12234')
-            parent.variables.set('c', 4);
+            parent.set('variables.c', 4);
             expect(getText()).toEqual('12244')
-            parent.variables.set('c', 0);
+            parent.set('variables.c', 0);
             expect(getText()).toEqual('122X')
           })
         })
@@ -582,13 +584,13 @@ describe("LSD.Fragment", function() {
             var el = new LSD.Element;
             el.appendChild(fragment);
             expect(el.textContent).toBe('Jeebz')
-            el.variables.set('a', 2)
+            el.set('variables.a', 2)
             expect(el.textContent).toBe('JEEEZblarghhh')
-            el.variables.set('b', 0)
+            el.set('variables.b', 0)
             expect(el.textContent).toBe('JEEEZTest')
-            el.variables.set('a', 1)
+            el.set('variables.a', 1)
             expect(el.textContent).toBe('Jeebz')
-            el.variables.set('a', 2)
+            el.set('variables.a', 2)
             expect(el.textContent).toBe('JEEEZTest')
           })
         })
@@ -602,7 +604,7 @@ describe("LSD.Fragment", function() {
           expect(parent.childNodes[2].nodeType).toEqual(7);
           expect(parent.childNodes[3].nodeType).toEqual(3);
           expect(parent.textContent).toBe('2')
-          parent.variables.set('a', 2)
+          parent.set('variables.a', 2)
           expect(parent.textContent).toBe('1')
           expect(fragment.variables).toBe(parent.variables);
           expect(fragment.parentNode).toBe(parent);
@@ -612,15 +614,15 @@ describe("LSD.Fragment", function() {
           expect(parent.childNodes[2].fragment.fragment).toBe(fragment)
           expect(parent.childNodes[2].nodeType).toEqual(3);
           expect(parent.childNodes[3].nodeType).toEqual(7);
-          parent.variables.set('a', 0)
+          parent.set('variables.a', 0)
           expect(parent.textContent).toBe('2')
           expect(parent.childNodes[2].nodeType).toEqual(7);
           expect(parent.childNodes[3].nodeType).toEqual(3);
-          parent.variables.set('a', 2)
+          parent.set('variables.a', 2)
           expect(parent.textContent).toBe('1')
           expect(parent.childNodes[2].nodeType).toEqual(3);
           expect(parent.childNodes[3].nodeType).toEqual(7);
-          parent.variables.set('a', 0)
+          parent.set('variables.a', 0)
           expect(parent.textContent).toBe('2')
           expect(parent.childNodes[2].nodeType).toEqual(7);
           expect(parent.childNodes[3].nodeType).toEqual(3);
@@ -643,35 +645,35 @@ describe("LSD.Fragment", function() {
           expect(parent.childNodes[3].nodeType).toBe(7)
           expect(parent.childNodes[4].nodeType).toBe(7)
           expect(parent.textContent).toBe('4')
-          parent.variables.set('b', true)
+          parent.set('variables.b', true)
           expect(parent.textContent).toBe('2')
-          parent.variables.set('c', true)
+          parent.set('variables.c', true)
           expect(parent.textContent).toBe('2')
-          parent.variables.unset('b', true)
+          parent.unset('variables.b', true)
           expect(parent.textContent).toBe('3')
-          parent.variables.set('a', true);
+          parent.set('variables.a', true);
           expect(parent.textContent).toBe('1')
-          parent.variables.unset('a', true);
+          parent.unset('variables.a', true);
           expect(parent.textContent).toBe('3')
-          parent.variables.unset('c', true)
+          parent.unset('variables.c', true)
           expect(parent.textContent).toBe('4')
-          parent.variables.set('a', true)
+          parent.set('variables.a', true)
           expect(parent.textContent).toBe('1')
-          parent.variables.set('b', true)
+          parent.set('variables.b', true)
           expect(parent.textContent).toBe('1')
-          parent.variables.unset('a', true);
+          parent.unset('variables.a', true);
           expect(parent.textContent).toBe('2')
-          parent.variables.unset('b', true);
+          parent.unset('variables.b', true);
           expect(parent.textContent).toBe('4')
-          parent.variables.set('c', true);
+          parent.set('variables.c', true);
           expect(parent.textContent).toBe('3')
-          parent.variables.set('b', true);
+          parent.set('variables.b', true);
           expect(parent.textContent).toBe('2')
-          parent.variables.unset('c', true);
+          parent.unset('variables.c', true);
           expect(parent.textContent).toBe('2')
-          parent.variables.unset('b', true);
+          parent.unset('variables.b', true);
           expect(parent.textContent).toBe('4')
-          parent.variables.set('c', true);
+          parent.set('variables.c', true);
           expect(parent.textContent).toBe('3')
         });
       })

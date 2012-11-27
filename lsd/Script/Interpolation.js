@@ -139,10 +139,10 @@ describe("LSD.Interpolation", function() {
     var element = document.createElement('div');
     element.innerHTML = html;
     var widget = new LSD.Element(element);
-    widget.variables.set('a', 0);
-    widget.variables.set('b', 1);
+    widget.set('variables.a', 0);
+    widget.set('variables.b', 1);
     expect(element.childNodes[0].textContent).toEqual('011');
-    widget.variables.set('a', 5);
+    widget.set('variables.a', 5);
     expect(element.childNodes[0].textContent).toEqual('154');
   });
 
@@ -170,11 +170,11 @@ describe("LSD.Interpolation", function() {
     expect(element.childNodes[0].textContent).toEqual('Hello there boy!');
     widget.variables.set('dog', true);
     expect(element.childNodes[0].textContent).toEqual('Hello there dog!');
-    widget.variables.unset('name', 'dog');
+    widget.unset('variables.name', 'dog');
     expect(element.childNodes[0].textContent).toEqual('Hello there boy!');
     widget.variables.set('name', 'log');
     expect(element.childNodes[0].textContent).toEqual('Hello there log!');
-    widget.variables.unset('dog', true);
+    widget.unset('variables.dog', true);
     expect(element.childNodes[0].textContent).toEqual('Hello there boy!');
   });
 
@@ -242,7 +242,7 @@ describe("LSD.Interpolation", function() {
     });
     expect(widget.childNodes[3].textContent.replace(/\s+/g, ' ')).toEqual(' Hey there Judas-boy! What is up for you man? How\'s Betraya business going? You may want to visit Traitors, Inc\'s website at file://c://traitors.text ')
     expect(widget.childNodes[1].childNodes[5].childNodes[1].childNodes[1].href).toEqual('file://c://traitors.text')
-    expect(widget.childNodes[1].childNodes[5].childNodes[1].childNodes[1].href).toEqual('file://c://traitors.text')
+    expect(widget.childNodes[1].childNodes[5].childNodes[1].childNodes[1].childNodes[1].textContent).toEqual('Traitors, Inc')
   });
 
   it ("should parse selectors", function() {
@@ -343,7 +343,7 @@ describe("LSD.Interpolation", function() {
           expect(video.getAttribute('src')).toEqual('movies/${movie.type}/${movie.id}.${Player.extension}')
           widget.variables.set('movie', ad);
           expect(video.getAttribute('src')).toEqual('movies/ad/weird.mpg')
-          widget.variables.unset('movie', ad);
+          widget.unset('variables.movie', ad);
           expect(video.getAttribute('src')).toEqual(null)
           widget.variables.set('movie', action);
           expect(video.getAttribute('src')).toEqual('movies/action/brucelee.mpg')
